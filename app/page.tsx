@@ -49,7 +49,6 @@ export default async function Home() {
         </p>
         <div className="mb-56 mt-6 flex flex-row items-center justify-center md:mb-[360px]">
           {socialMediaLinks.map((social, index) => {
-            const mdl = (index / 2) + index;
             return (
               <TooltipProvider key={social.title}>
                 <Tooltip>
@@ -58,7 +57,7 @@ export default async function Home() {
                       href={social.href}
                       className="mx-2 animate-slide-down-fade text-gray-500 opacity-0"
                       style={{
-                        animationDelay: `${mdl}.5s`,
+                        animationDelay: `${index / 2}.5s`,
                         animationFillMode: "forwards",
                       }}
                     >
