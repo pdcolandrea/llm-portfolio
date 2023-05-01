@@ -7,6 +7,12 @@ import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
 import { GithubIcon, Linkedin, LinkedinIcon, Mail } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default async function Home() {
   const { stargazers_count: stars } = await fetch(
@@ -41,9 +47,20 @@ export default async function Home() {
             Digital crafter specializing in Frontend development.
           </Balancer>
         </p>
-        <div className="mb-56 mt-6 flex flex-row md:mb-[400px]">
+        <div className="mb-56 mt-6 flex flex-row items-center justify-center md:mb-[400px]">
           {socialMediaLinks.map((social) => {
-            return <div key={social.title}>{social.component}</div>;
+            return (
+              <TooltipProvider key={social.title}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div>{social.component}</div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{social.title}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            );
           })}
         </div>
 
