@@ -13,6 +13,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { motion } from "framer-motion";
+import { AnimatedSocialIcons } from "@/components/home/animated-icons";
 
 export default async function Home() {
   const { stargazers_count: stars } = await fetch(
@@ -48,29 +50,7 @@ export default async function Home() {
           </Balancer>
         </p>
         <div className="mb-56 mt-6 flex flex-row items-center justify-center md:mb-[360px]">
-          {socialMediaLinks.map((social, index) => {
-            return (
-              <TooltipProvider key={social.title}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <a
-                      href={social.href}
-                      className="mx-2 animate-slide-down-fade text-gray-500 opacity-0"
-                      style={{
-                        animationDelay: `${index / 2}.5s`,
-                        animationFillMode: "forwards",
-                      }}
-                    >
-                      {social.component}
-                    </a>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>{social.title}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            );
-          })}
+          <AnimatedSocialIcons />
         </div>
 
         <div className="items-center justify-center text-center">
