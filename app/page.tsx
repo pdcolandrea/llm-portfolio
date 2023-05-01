@@ -6,6 +6,7 @@ import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
+import { GithubIcon, Linkedin, LinkedinIcon, Mail } from "lucide-react";
 
 export default async function Home() {
   const { stargazers_count: stars } = await fetch(
@@ -33,19 +34,30 @@ export default async function Home() {
           <Balancer>Hi! My name is Paul.</Balancer>
         </h1>
         <p
-          className="mb-[430px] mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
+          className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
             Digital crafter specializing in Frontend development.
           </Balancer>
         </p>
+        <div className="mb-56 mt-6 flex flex-row md:mb-[400px]">
+          {socialMediaLinks.map((social) => {
+            return <div key={social.title}>{social.component}</div>;
+          })}
+        </div>
 
-      <div className="items-center justify-center text-center">
-      <p className="text-gray-700">
-          Tampa, FL 🇺🇲 
-        </p>
-      <small className="text-gray-700">&#123;4:30PM&#125; </small>
+        <div className="items-center justify-center text-center">
+          <p className="text-gray-700">🇺🇲Tampa, FL</p>
+          <small className="text-gray-700">
+            &#123;
+            {new Date().toLocaleTimeString("en-US", {
+              timeZone: "America/New_York",
+              hour: "numeric",
+              minute: "2-digit",
+            })}
+            &#125;{" "}
+          </small>
         </div>
       </div>
 
@@ -69,6 +81,21 @@ export default async function Home() {
     </>
   );
 }
+
+const socialMediaLinks = [
+  {
+    title: "Email",
+    component: <Mail />,
+  },
+  {
+    title: "Linkedin",
+    component: <Linkedin />,
+  },
+  {
+    title: "Github",
+    component: <Github />,
+  },
+];
 
 const features = [
   {
