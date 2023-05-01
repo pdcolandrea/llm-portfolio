@@ -47,13 +47,23 @@ export default async function Home() {
             Digital crafter specializing in Frontend development.
           </Balancer>
         </p>
-        <div className="mb-56 mt-6 flex flex-row items-center justify-center md:mb-[400px]">
-          {socialMediaLinks.map((social) => {
+        <div className="mb-56 mt-6 flex flex-row items-center justify-center md:mb-[360px]">
+          {socialMediaLinks.map((social, index) => {
+            const mdl = (index / 2) + index;
             return (
               <TooltipProvider key={social.title}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div>{social.component}</div>
+                    <a
+                      href={social.href}
+                      className="mx-2 animate-slide-down-fade text-gray-500 opacity-0"
+                      style={{
+                        animationDelay: `${mdl}.5s`,
+                        animationFillMode: "forwards",
+                      }}
+                    >
+                      {social.component}
+                    </a>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{social.title}</p>
@@ -103,14 +113,17 @@ const socialMediaLinks = [
   {
     title: "Email",
     component: <Mail />,
+    href: "mailto://colandrea@gmail.com",
   },
   {
     title: "Linkedin",
     component: <Linkedin />,
+    href: "https://linkedin.com/u/pdcolandrea",
   },
   {
     title: "Github",
     component: <Github />,
+    href: "https://github.com/pdcolandrea",
   },
 ];
 
