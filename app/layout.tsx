@@ -5,6 +5,7 @@ import { sfPro, inter } from "./fonts";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
+import { Providers } from "./providers";
 
 export const metadata = {
   title: "Precedent - Building blocks for your Next.js project",
@@ -35,9 +36,12 @@ export default async function RootLayout({
           <Nav />
         </Suspense>
 
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
-          {children}
-        </main>
+        <Providers>
+          <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+            {children}
+          </main>
+        </Providers>
+
         <Footer />
         <Analytics />
       </body>

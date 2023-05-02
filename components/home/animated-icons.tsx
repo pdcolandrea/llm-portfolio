@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../ui/tooltip";
-import { Mail, Linkedin, Github } from "lucide-react";
+} from '../ui/tooltip';
+import { Mail, Linkedin, Github } from 'lucide-react';
 
 export const AnimatedSocialIcons = () => {
   return (
@@ -22,7 +22,7 @@ export const AnimatedSocialIcons = () => {
                   className="mx-2 text-gray-500"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  style={{ animationDelay: "0.5s" }}
+                  style={{ animationDelay: '0.5s' }}
                 >
                   {social.component}
                 </motion.a>
@@ -40,18 +40,18 @@ export const AnimatedSocialIcons = () => {
 
 const socialMediaLinks = [
   {
-    title: "Email",
+    title: 'Email',
     component: <Mail />,
-    href: "mailto://colandrea@gmail.com",
+    href: 'mailto://colandrea@gmail.com',
   },
   {
-    title: "Linkedin",
+    title: 'Linkedin',
     component: <Linkedin />,
-    href: "https://linkedin.com/u/pdcolandrea",
+    href: 'https://linkedin.com/u/pdcolandrea',
   },
   {
-    title: "Github",
+    title: 'Github',
     component: <Github />,
-    href: "https://github.com/pdcolandrea",
+    href: 'https://github.com/pdcolandrea',
   },
 ];

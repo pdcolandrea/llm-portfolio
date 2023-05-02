@@ -1,29 +1,24 @@
-import Card from "@/components/home/card";
-import Balancer from "react-wrap-balancer";
-import { DEPLOY_URL } from "@/lib/constants";
-import { Github, Twitter } from "@/components/shared/icons";
-import WebVitals from "@/components/home/web-vitals";
-import ComponentGrid from "@/components/home/component-grid";
-import Image from "next/image";
-import { nFormatter } from "@/lib/utils";
-import { GithubIcon, Linkedin, LinkedinIcon, Mail } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { motion } from "framer-motion";
-import { AnimatedSocialIcons } from "@/components/home/animated-icons";
+import Card from '@/components/home/card';
+import Balancer from 'react-wrap-balancer';
+import { DEPLOY_URL } from '@/lib/constants';
+import WebVitals from '@/components/home/web-vitals';
+import ComponentGrid from '@/components/home/component-grid';
+import Image from 'next/image';
+import { AnimatedSocialIcons } from '@/components/home/animated-icons';
 
 export default async function Home() {
+  const date = new Date().toLocaleTimeString('en-US', {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: '2-digit',
+  });
   const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/steven-tey/precedent",
+    'https://api.github.com/repos/steven-tey/precedent',
     {
       ...(process.env.GITHUB_OAUTH_TOKEN && {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_OAUTH_TOKEN}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }),
       // data will revalidate every 60 seconds
@@ -37,32 +32,30 @@ export default async function Home() {
         <div className="mx-auto mb-4 h-28 w-28 rounded-full bg-red-200" />
         <h1
           className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
-          style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
+          style={{ animationDelay: '0.15s', animationFillMode: 'forwards' }}
         >
           <Balancer>Hi! My name is Paul.</Balancer>
         </h1>
         <p
           className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
-          style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
+          style={{ animationDelay: '0.25s', animationFillMode: 'forwards' }}
         >
           <Balancer>
             Digital crafter specializing in Frontend development.
           </Balancer>
         </p>
-        <div className="mb-56 mt-6 flex flex-row items-center justify-center md:mb-[360px]">
+        <div className="mb-48 mt-6 flex flex-row items-center justify-center md:mb-[360px]">
           <AnimatedSocialIcons />
         </div>
 
         <div className="items-center justify-center text-center">
           <p className="text-gray-700">🇺🇲Tampa, FL</p>
           <small className="text-gray-700">
-            &#123;
-            {new Date().toLocaleTimeString("en-US", {
-              timeZone: "America/New_York",
-              hour: "numeric",
-              minute: "2-digit",
-            })}
-            &#125;{" "}
+            <span className="cursor-pointer font-semibold">
+              {parseInt(date.split(':')[0]) < 12 ? '☀️' : '🌙'} &#123;
+              {date}
+              &#125;{' '}
+            </span>
           </small>
         </div>
       </div>
@@ -74,7 +67,7 @@ export default async function Home() {
             title={title}
             description={description}
             demo={
-              title === "Beautiful, reusable components" ? (
+              title === 'Beautiful, reusable components' ? (
                 <ComponentGrid />
               ) : (
                 demo
@@ -88,41 +81,23 @@ export default async function Home() {
   );
 }
 
-const socialMediaLinks = [
-  {
-    title: "Email",
-    component: <Mail />,
-    href: "mailto://colandrea@gmail.com",
-  },
-  {
-    title: "Linkedin",
-    component: <Linkedin />,
-    href: "https://linkedin.com/u/pdcolandrea",
-  },
-  {
-    title: "Github",
-    component: <Github />,
-    href: "https://github.com/pdcolandrea",
-  },
-];
-
 const features = [
   {
-    title: "Beautiful, reusable components",
+    title: 'Beautiful, reusable components',
     description:
-      "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
+      'Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)',
     large: true,
   },
   {
-    title: "Performance first",
+    title: 'Performance first',
     description:
-      "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
+      'Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.',
     demo: <WebVitals />,
   },
   {
-    title: "One-click Deploy",
+    title: 'One-click Deploy',
     description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+      'Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.',
     demo: (
       <a href={DEPLOY_URL}>
         <Image
@@ -136,9 +111,9 @@ const features = [
     ),
   },
   {
-    title: "Built-in Auth + Database",
+    title: 'Built-in Auth + Database',
     description:
-      "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
+      'Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)',
     demo: (
       <div className="flex items-center justify-center space-x-20">
         <Image alt="Auth.js logo" src="/authjs.webp" width={50} height={50} />
@@ -147,9 +122,9 @@ const features = [
     ),
   },
   {
-    title: "Hooks, utilities, and more",
+    title: 'Hooks, utilities, and more',
     description:
-      "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
+      'Precedent offers a collection of hooks, utilities, and `@vercel/og`',
     demo: (
       <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
         <span className="font-mono font-semibold">useIntersectionObserver</span>
