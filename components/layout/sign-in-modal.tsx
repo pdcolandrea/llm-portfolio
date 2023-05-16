@@ -1,14 +1,14 @@
-import Modal from "@/components/shared/modal";
-import { signIn } from "next-auth/react";
+import Modal from '@/components/shared/modal';
+import { signIn } from 'next-auth/react';
 import {
   useState,
   Dispatch,
   SetStateAction,
   useCallback,
   useMemo,
-} from "react";
-import { LoadingDots, Google } from "@/components/shared/icons";
-import Image from "next/image";
+} from 'react';
+import { LoadingDots, Google } from '@/components/shared/icons';
+import Image from 'next/image';
 
 const SignInModal = ({
   showSignInModal,
@@ -44,12 +44,12 @@ const SignInModal = ({
             disabled={signInClicked}
             className={`${
               signInClicked
-                ? "cursor-not-allowed border-gray-200 bg-gray-100"
-                : "border border-gray-200 bg-white text-black hover:bg-gray-50"
+                ? 'cursor-not-allowed border-gray-200 bg-gray-100'
+                : 'border border-gray-200 bg-white text-black hover:bg-gray-50'
             } flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}
             onClick={() => {
               setSignInClicked(true);
-              signIn("google");
+              signIn('google');
             }}
           >
             {signInClicked ? (

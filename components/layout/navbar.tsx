@@ -7,6 +7,12 @@ import { Session } from 'next-auth';
 import { File } from 'lucide-react';
 import { useSignInModal } from './sign-in-modal';
 import UserDropdown from './user-dropdown';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip';
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
@@ -34,19 +40,29 @@ export default function NavBar({ session }: { session: Session | null }) {
             <p>paul.dev</p>
           </Link>
           <div className="flex flex-row">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="mr-2 cursor-pointer rounded-full border border-black p-2 hover:bg-black hover:text-white ">
+                    <File size={16} />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>View Resume</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             {session ? (
               <UserDropdown session={session} />
             ) : (
               <button
                 className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
                 onClick={() => setShowSignInModal(true)}
+                type="button"
               >
                 Contact Me
               </button>
             )}
-            <span className="ml-2 rounded-full border-2 border-black p-2 ">
-              <File className="" />
-            </span>
           </div>
         </div>
       </div>

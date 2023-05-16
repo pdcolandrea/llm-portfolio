@@ -1,17 +1,15 @@
-import Card from '@/components/home/card';
 import Balancer from 'react-wrap-balancer';
 import { DEPLOY_URL } from '@/lib/constants';
 import WebVitals from '@/components/home/web-vitals';
-import ComponentGrid from '@/components/home/component-grid';
+
 import Image from 'next/image';
-import { AnimatedSocialIcons } from '@/components/home/animated-icons';
+import AnimatedSocialIcons from '@/components/home/animated-icons';
+import { getHomeTime } from '@/lib/utils';
+
+import Avatar from '@/components/home/avatar';
 
 export default async function Home() {
-  const date = new Date().toLocaleTimeString('en-US', {
-    timeZone: 'America/New_York',
-    hour: 'numeric',
-    minute: '2-digit',
-  });
+  const { isDaytime, time } = getHomeTime();
   const { stargazers_count: stars } = await fetch(
     'https://api.github.com/repos/steven-tey/precedent',
     {
@@ -28,8 +26,8 @@ export default async function Home() {
 
   return (
     <>
-      <div className="z-10 w-full max-w-xl px-5 xl:px-0">
-        <div className="mx-auto mb-4 h-28 w-28 rounded-full bg-red-200" />
+      <div className="z-10 flex h-[80vh] w-full max-w-xl flex-col  px-5 xl:px-0">
+        <Avatar />
         <h1
           className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
           style={{ animationDelay: '0.15s', animationFillMode: 'forwards' }}
@@ -44,23 +42,22 @@ export default async function Home() {
             Digital crafter specializing in Frontend development.
           </Balancer>
         </p>
-        <div className="mb-48 mt-6 flex flex-row items-center justify-center md:mb-[360px]">
+        <div className="mt-6 flex flex-row items-center justify-center">
           <AnimatedSocialIcons />
         </div>
 
-        <div className="items-center justify-center text-center">
+        <div className="flex flex-1 flex-col items-center justify-end">
           <p className="text-gray-700">🇺🇲Tampa, FL</p>
           <small className="text-gray-700">
             <span className="cursor-pointer font-semibold">
-              {parseInt(date.split(':')[0]) < 12 ? '☀️' : '🌙'} &#123;
-              {date}
-              &#125;{' '}
+              {isDaytime ? '☀️' : '🌙'}
+              {time}
             </span>
           </small>
         </div>
       </div>
 
-      <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
+      {/* <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
         {features.map(({ title, description, demo, large }) => (
           <Card
             key={title}
@@ -76,7 +73,7 @@ export default async function Home() {
             large={large}
           />
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

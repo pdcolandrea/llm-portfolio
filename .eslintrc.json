@@ -2,7 +2,9 @@
   "extends": ["next/core-web-vitals", "airbnb", "airbnb/hooks"],
   "rules": {
     "import/extensions": "off",
+    "radix": "off",
     "react/jsx-one-expression-per-line": "off",
+    "react/function-component-definition": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "react/destructuring-assignment": "off" // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
