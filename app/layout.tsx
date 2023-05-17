@@ -6,6 +6,7 @@ import Footer from '@/components/layout/footer';
 import { Suspense } from 'react';
 import { sfPro, inter } from './fonts';
 import { Providers } from './providers';
+import AnimatedCard from '@/components/home/animated-card';
 
 export const metadata = {
   title: 'Precedent - Building blocks for your Next.js project',

@@ -3,32 +3,15 @@
 import Balancer from 'react-wrap-balancer';
 import { DEPLOY_URL } from '@/lib/constants';
 import WebVitals from '@/components/home/web-vitals';
-import { motion } from 'framer-motion';
-
 import Image from 'next/image';
 import AnimatedSocialIcons from '@/components/home/animated-icons';
 import { getHomeTime } from '@/lib/utils';
-
 import Avatar from '@/components/home/avatar';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { useState } from 'react';
-
-const ACard = motion(Card);
+import AnimatedCard from '@/components/home/animated-card';
 
 export default async function Home() {
-  const [hasClicked, setHasClicked] = useState(false);
-
   const { isDaytime, time } = getHomeTime();
+
   const { stargazers_count: stars } = await fetch(
     'https://api.github.com/repos/steven-tey/precedent',
     {
@@ -66,37 +49,7 @@ export default async function Home() {
         </div>
 
         <div className="flex flex-1 items-end justify-center">
-          <ACard
-            layout
-            onClick={() => setHasClicked(true)}
-            whileHover={{
-              width: '80%',
-            }}
-            // data-isOpen={isOpen}
-            className={`group bg-slate-50 ${hasClicked ?? 'w-4/5'}`}
-          >
-            <CardHeader>
-              <CardTitle className="text-gray-600">Ask me a question</CardTitle>
-              <CardDescription className="hidden group-hover:block">
-                An LLM trained on custom information about myself
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="hidden animate-slide-down-fade transition-all group-hover:block">
-              <form>
-                <div className="flex flex-col space-y-1.5">
-                  <Label htmlFor="name">Question</Label>
-                  <Input
-                    id="name"
-                    placeholder="What is your favorite framework?"
-                  />
-                </div>
-              </form>
-            </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button variant="ghost">Not Now</Button>
-              <Button>Ask</Button>
-            </CardFooter>
-          </ACard>
+          <AnimatedCard />
         </div>
 
         {/* <div className="flex flex-1 flex-col items-center justify-end">
