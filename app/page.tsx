@@ -1,14 +1,33 @@
+'use client';
+
 import Balancer from 'react-wrap-balancer';
 import { DEPLOY_URL } from '@/lib/constants';
 import WebVitals from '@/components/home/web-vitals';
+import { motion } from 'framer-motion';
 
 import Image from 'next/image';
 import AnimatedSocialIcons from '@/components/home/animated-icons';
 import { getHomeTime } from '@/lib/utils';
 
 import Avatar from '@/components/home/avatar';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+
+const ACard = motion(Card);
 
 export default async function Home() {
+  const [hasClicked, setHasClicked] = useState(false);
+
   const { isDaytime, time } = getHomeTime();
   const { stargazers_count: stars } = await fetch(
     'https://api.github.com/repos/steven-tey/precedent',
@@ -26,7 +45,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="z-10 flex h-[80vh] w-full max-w-xl flex-col  px-5 xl:px-0">
+      <div className="z-10 flex h-[80vh] w-full max-w-xl flex-col px-5 xl:px-0">
         <Avatar />
         <h1
           className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
@@ -46,7 +65,41 @@ export default async function Home() {
           <AnimatedSocialIcons />
         </div>
 
-        <div className="flex flex-1 flex-col items-center justify-end">
+        <div className="flex flex-1 items-end justify-center">
+          <ACard
+            layout
+            onClick={() => setHasClicked(true)}
+            whileHover={{
+              width: '80%',
+            }}
+            // data-isOpen={isOpen}
+            className={`group bg-slate-50 ${hasClicked ?? 'w-4/5'}`}
+          >
+            <CardHeader>
+              <CardTitle className="text-gray-600">Ask me a question</CardTitle>
+              <CardDescription className="hidden group-hover:block">
+                An LLM trained on custom information about myself
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="hidden animate-slide-down-fade transition-all group-hover:block">
+              <form>
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="name">Question</Label>
+                  <Input
+                    id="name"
+                    placeholder="What is your favorite framework?"
+                  />
+                </div>
+              </form>
+            </CardContent>
+            <CardFooter className="flex justify-between">
+              <Button variant="ghost">Not Now</Button>
+              <Button>Ask</Button>
+            </CardFooter>
+          </ACard>
+        </div>
+
+        {/* <div className="flex flex-1 flex-col items-center justify-end">
           <p className="text-gray-700">🇺🇲Tampa, FL</p>
           <small className="text-gray-700">
             <span className="cursor-pointer font-semibold">
@@ -54,7 +107,7 @@ export default async function Home() {
               {time}
             </span>
           </small>
-        </div>
+        </div> */}
       </div>
 
       {/* <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
