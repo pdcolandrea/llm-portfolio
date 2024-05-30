@@ -8,8 +8,12 @@ import AnimatedSocialIcons from '@/components/home/animated-icons';
 import { getHomeTime } from '@/lib/utils';
 import Avatar from '@/components/home/avatar';
 import AnimatedCard from '@/components/home/animated-card';
+import { useQuestion } from '@/lib/hooks/use-question';
+import { FormEvent, useState } from 'react';
 
 export default async function Home() {
+  const [answers, setAnswers] = useState<string[]>([]);
+  const askQuestion = useQuestion();
   const { isDaytime, time } = getHomeTime();
 
   const { stargazers_count: stars } = await fetch(
@@ -25,6 +29,21 @@ export default async function Home() {
       next: { revalidate: 60 },
     },
   ).then((res) => res.json());
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const question = e.target?.prompt.value;
+
+    askQuestion.mutate(
+      { question },
+      {
+        onSuccess: ({ resp }) => {
+          console.log({ resp });
+          setAnswers((a) => a.concat(resp.answer));
+        },
+      },
+    );
+  };
 
   return (
     <>
@@ -49,7 +68,7 @@ export default async function Home() {
         </div>
 
         <div className="flex flex-1 items-end justify-center">
-          <AnimatedCard />
+          <AnimatedCard onSubmit={onSubmit} />
         </div>
 
         {/* <div className="flex flex-1 flex-col items-center justify-end">

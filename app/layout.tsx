@@ -6,7 +6,6 @@ import Footer from '@/components/layout/footer';
 import { Suspense } from 'react';
 import { sfPro, inter } from './fonts';
 import { Providers } from './providers';
-import AnimatedCard from '@/components/home/animated-card';
 
 export const metadata = {
   title: 'Precedent - Building blocks for your Next.js project',
@@ -29,7 +28,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={cx(sfPro.variable, inter.variable)}>
         <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-gray-600" />
         <Suspense fallback="...">
